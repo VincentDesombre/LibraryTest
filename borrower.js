@@ -27,6 +27,11 @@ class Borrower
 
         try {
             rl.question(query, answer => {
+                if (answer.trim().length === 0) {
+                    console.log("Informations must not be empty strings");
+                    Starter.starter("");
+                    return;
+                }
                 this.borrower_to_add[step] = answer;
                 if (step > 1) {
                     if (!this.checkBorrowerValidity(this.borrower_to_add) && 

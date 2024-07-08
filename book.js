@@ -36,13 +36,18 @@ class Book
                 if (step > 8) {
                     if (!this.checkBookValidity(this.book_to_add))
                         this.addBookToCsv(this.book_to_add);
-                    console.log("1");
                     this.book_to_add = [];
                     Starter.starter("");
                     return;
                 }
-                else
+                else {
+                    if (step === 0 && answer.trim().length === 0) {
+                        console.log("ISBN can't be empty");
+                        Starter.starter("");
+                        return;
+                    }
                     this.addBook(rl, step + 1, Starter);
+                }
             })
         }
         catch (e) {
@@ -84,7 +89,6 @@ class Book
      * 
      */
     checkBookExistsValidity(book, fromBorrower) {
-        console.log(book);
         let doesBookExist = 0;
         let data = fs.readFileSync("livres.csv", "utf8");
         let linesExceptFirst = data.split('\n').slice(1);

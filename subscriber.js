@@ -25,6 +25,11 @@ class Subscriber
 
         try {
             rl.question(query, answer => {
+                if (answer.trim().length === 0) {
+                    console.log("Informations must not be empty strings");
+                    Starter.starter("");
+                    return;
+                }
                 this.sub_to_add[step] = answer;
                 if (step > 0) {
                     if (!this.checkExists(this.sub_to_add, 0))
